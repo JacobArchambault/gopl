@@ -8,6 +8,6 @@ import (
 // Echo2 prints its command-line arguments.
 func main() {
 	for i, arg := range os.Args {
-		fmt.Println(i, arg)	
+		fmt.Println(i, arg)
 	}
 }
