@@ -8,5 +8,5 @@ import (
 
 // Echo2 prints its command-line arguments.
 func main() {
-	fmt.Println(strings.Join(os.Args[:], " "))
+	fmt.Println(strings.Join(os.Args, " "))
 }
