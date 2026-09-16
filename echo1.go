@@ -3,10 +3,11 @@ package main
 import (
 	"fmt"
 	"os"
-	"strings"
 )
 
 // Echo2 prints its command-line arguments.
 func main() {
-	fmt.Println(strings.Join(os.Args, " "))
+	for i, arg := range os.Args {
+		fmt.Println(i, arg)	
+	}
 }
