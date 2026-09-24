@@ -24,6 +24,9 @@ func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		cyclesParam := r.URL.Query().Get("cycles")
 		cycles, _ := strconv.ParseFloat(cyclesParam, 64)
+		if cycles == 0 {
+			cycles = 20
+		}
 		lissajous(w, cycles)
 	})
 	log.Fatal(http.ListenAndServe("localhost:8000", nil))
