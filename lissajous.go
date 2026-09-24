@@ -9,6 +9,7 @@ import (
 	"math"
 	"math/rand"
 	"net/http"
+	"strconv"
 )
 
 var palette = []color.Color{color.Black, color.RGBA{0x00, 0xff, 0x00, 0xff}, color.RGBA{0xff, 0x00, 0xff, 0xff}}
@@ -21,14 +22,16 @@ const (
 
 func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		lissajous(w)
+		cyclesParam := r.URL.Query().Get("cycles")
+		cycles, _ := strconv.ParseFloat(cyclesParam, 64)
+		lissajous(w, cycles)
 	})
 	log.Fatal(http.ListenAndServe("localhost:8000", nil))
 }
 
-func lissajous(out io.Writer) {
+func lissajous(out io.Writer, cycles float64) {
 	const (
-		cycles  = 20    // number of complete x oscillator revolutions
+		defaultCycles  = 20    // number of complete x oscillator revolutions
 		res     = 0.001 // angular resolution
 		size    = 100   // image canvas covers [-1..+size]
 		nframes = 64    // number of animation frames
